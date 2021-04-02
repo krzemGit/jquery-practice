@@ -1,0 +1,15 @@
+AJAX FUNCTIONS IN jQuery:
+
+$.get()
+$.post()
+$.ajax()
+$.getJSON()
+
+?jsoncallback=?  - good to place it at the end of the url where you retreive data from, it asks for JSON specifically
+
+$.getJSON().done(function() {}) - executed when the data is succesfully retreived
+$.getJSOM().fail(function() {}) - executed when the data retreival has failed
+
+Usual formula:
+
+$.getJSON(url, selectionCriteriaAsObject).done(function(data) { //display on website}).fail(function() {alert("AJAX call failed!")});

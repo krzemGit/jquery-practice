@@ -1,0 +1,21 @@
+*****BASIC*****
+
+let galleryImage = $(".gallery").find("img").first();
+console.log(galleryImage)
+let images = [
+  "images/laptop-mobile_small.jpg",
+  "images/laptop-on-table_small.jpg",
+  "images/people-office-group-team_small.jpg"
+];
+console.log(images)
+
+var imageNo = 0;
+setInterval(function() {
+  imageNo = (imageNo + 1) % images.length;  // infinite loop of 1, 2, 0, 1, 2,...
+  galleryImage.fadeOut(function() {
+    $(this).attr("src", images[imageNo]);   // nesting these methods change and the fadeIn inside this function makes the (1) change and (2) fadeIn appear after the fadeOut
+    $(this).fadeIn();
+  });
+}, 4000);
+
+});

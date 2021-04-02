@@ -1,0 +1,395 @@
+FadeIn perks
+
+.fadeOut gives the element "display: none" property, so it is "removed" from the place, whereas
+.fadeTo(2000, 0) makes element fully transparent, but does not make it "disappear" so it still occupies space! It causes a problem when you fadeTo element that has been fadedOut - it would not show because it still has display:none element.
+
+
+Show / Hide
+
+you use .show() or .hide() methods. 
+In order to hide a visible element or reveal the hidden one use .toggle()
+Adding time would make the object shrink (for hide) or enlarge (for show)
+
+.slideUp() would make the element disappear by sliding sliding up , you can use time indicator for duration
+.slideDown() would make it appear again
+.slideToggle() would work the same as in previous causes
+
+Collapse: you (1) set property of paragraph to .hide() and than set a .slideDown() with time on a button (with event listener)
+
+
+-------CSS Selectors----------
+
+$('p:first').css('background-color','rgb(102, 102, 102)');  // modify background for the first paragraph
+
+$('p:last') // would choose the last paragraph
+$('p:even') // would choose even paragraphs (every second)
+$('p:odd') // would choose odd paragraphs (every second)
+
+$('input:radio') //would choose input elements with word 'radio' in any of its properties
+$('input:selected') //would choose input elements that are selected
+
+full list: https://www.w3schools.com/jquery/jquery_ref_selectors.asp
+
+
+--------Traversing trough elements----------
+
+$("#list').find('li').css('color', 'rgba(200, 100, 0, 0.9)') // would change a color of all li elements to orange
+$("#list').children('li')  // would find all childern elements of the +list element which are <li> tags 
+$("#list').parents('li')  // would find all parent elements of the +list element which are <li> tags 
+$("#list').parent('li') // the same as above but only one, closest element
+$("#list').sibilings('li') // would choose the elements which are <li> and are on the same level
+
+$("#list').prev() // would choose the previous element to that we have selected (not going up or down with nodes)
+$("#list').next() // would choose the next element to that we have selected (not going up or down with nodes)
+
+
+---------Filtering Elements ----------------
+
+$("#list").children("li").filter(":even") // would select every even <li> child element to #list !!!!! .filter() seems to work opposite to the JS method 
+
+U can use a function also:
+
+$("#list").children("li").filter(function(index) {
+    return index % 3 == 0;
+  });	// This would return every third element from children of #list, index ia a built-in value in jquery
+
+$("li").first() // would select the first <li> element (with all children if apllicable)
+$("li").last() // would select the last <li> element (most likely the last child also, so no sibillings would be there)
+
+$("li").eq(4) //would choose the forth element <li>
+$("li").eq(-2) // wuld choose second-to-last element from all <li>
+
+$("li").not(":first") // sould choose all <li> elements except the first (more like the .filter() function in vanilla JS) 
+$("li li")  // select all elements that are <li> childe to other <li>
+
+
+************ DOM manipulation *************************
+
+-----------Adding new elements---------------------
+
+Adding new element to DOM, two ways: 
+
+(1) 	$("ul ul:first").append("<li>I'm gonna be the last sub-item"</li>);  // adds the last element to the first sublist
+(2) 	$(<li>I'm gonna be the last item</li>).appendTo($("ul ul:first"))  //the same effect
+
+
+Adding element at the beginning:
+
+	$("ul ul").prepend("<li>I'm gonna be the first sub-item</li>")  // adds the element at the beginning of every lower nested list
+
+
+Adding element at the beginning of the website:
+
+	$("<h4>Lech Krzem</h4>").prependTo("#content");
+
+
+Adding sibilings:
+
+(1)	$(".red-box").after("<div class='red-box'>Another Red</div>"); // new sibilings after the one selected
+(2)	$(".blue-box").blue("<div class='blue-box'>Previous Blue</div>"); // new sibilings before the one selected
+(3)	$(".green-box").after(function() {				// this with a function
+    	 return "<div class='green-box'>New Green</div>";
+  	});
+
+
+Moving an element:
+
+	$("blue-box").before($(".red-box"));	//this would actually move the red box (or all red boxes if there are more) before the blue box
+						// if there are more than one blue boxes, the red box will be cloned multiple times
+
+-----------Replacing elements and content---------------
+
+Replacing elements:
+
+(1)	$("li").replaceWith(<li>Replaced</li>);
+(2)	$("li").replaceWith(function () {
+		return "<li>Replaced with function</li>"
+	});
+
+Moving elements to replace another:
+
+	let firstListItem = $("li:first");
+	$("p").replaceWith(firstListItem);
+
+Replacing all elements with (reversed syntax!):
+
+	$("<div class='green-box'>Another Green Box</div>").replaceAll(".red-box, .blue-box");  // will replace all red and blue boxes with what we typed in the first place
+
+------------Removing elements----------------------------
+
+Removing elements:
+	$("li").remove()  				// will remove all elements <li> (whole list most likely)
+
+	let detachedListItem = $("li").detach(); 	// the item will be removed from the page and stored in variable for further insert !! without the loss of all its associated values and functions !! 
+	
+	$("p:first").empty(); 				// removes the elements inside: (1) text and (2) all child elements
+
+-----------Manipulating attributes and properties-------
+	
+	.attr(attributeName, newValue)   // values are name, class etc)
+	.prop()				 // used for checked, selected or disabled properties (if it is currently checked or not, attr would only give you the initial state, at the page load)
+ 	.val()				 // checks the value of input (set by default or inserted if used on eventListener)
+
+	EXAMPLES:
+
+	let specialLink = $("#specialLink");
+	consloe.log(specialLink.attr("href");
+
+	console.log(checkbox.prop("checked"));	// console would log true or false
+
+	let rangeInput = $("input[type='range']");	// gives the value of the range element (input with type range)
+	console.log(rangeInput.val)
+
+
+-----------Changing the CSS properties of elements------
+
+Pattern: $("element").css("propertyName", "propertyValue")
+
+EXAMPLES:
+
+	$(".gallery").css("display", "none");
+	
+	let redBox = $(".red-box"); 
+	console.log(redBox.css("width"));	// will log width with units (e.g. "80px")
+	console.log(redBox.width());		// will log width without units
+
+	redBox.css("background-color", "#AA7700");
+	$("p").css("font-size", "18px");
+	redBox.css("width", "+=20px")		// will increase the width by 20px
+
+	let properties = $("p").css(["font-size", "line-height", "color"]);	// parameters can be also an array
+	console.log(properties);		// will log the object with the three properties as per the array
+	console.log(properties["font-size"])	// will log the value of on key selected from the object
+
+	redBox("user-select", "none")		// prevents selecting the text with cursor on the website (good against copy-paste)
+	redBox("user-select", function () {	// can also be a function, useful to set attribute as collected from a user input (requires eventListener)
+	let collectedValue = $("input:widthValue").val()
+	return collectedValue
+	})
+
+
+----------------------adding / removing Classes---------
+
+Patterm $("element").addClass("newClass")
+
+EXAMPLES:
+
+$("a").addClass("fancy-link");    			// class="..."
+$("p:first").addClass("large emphasize");
+
+$("li li").addCLass(function(index) {			//with callback function
+	$(this).addClass("item"+index);
+});
+$("div").addCLass(function(index, currentClass) {	//with "currentClass parameter (built-in)
+	if (currentClass === "dummy") {
+		return "red-box"
+
+PATTERN: .removeCLass()
+
+$(".red-box").removeCLass("red-box")
+
+
+PATTERN for changing class .removeClass("aaa").addClass("bbb")
+
+-------------------Changing DATA of the element---------
+
+DATA - any form of data associated with a HTML element, in jQUery (and in JS) preceived as an object.
+
+formula:	.data()
+
+EXAMPLE - storing images in a variable with data:
+
+let gallery = $(".gallery");
+let images = [
+  "images/laptop-mobile_small.jpg",
+  "images/laptop-on-table_small.jpg",
+  "images/people-office-group-team_small.jpg"
+];
+
+gallery.data("availableImages", images) - sets an object connected to gallery that has a key "availableImages" and value - a list of urls to the photos.
+
+gallery.data("name", "The Awsome Gallery") - sets a data to the gallery element in a form of an object { name: "The Awsome Gallery")
+
+
+gallery.removeData("name") - removes the data object set for the gallery element in the previous line.
+
+-------------------Content of the HTML element---------
+
+.text()		// this method ignores the html elements (e.g. <span> inside the text)
+.html()		// this will include all html markers and elements inside the content
+
+EXAMPLES:
+	
+	let firstPar = $("p:first")
+	firstPar.text("<strong>Hello</strong>World!");	//this would add the following to site: <strong>Hello</strong>World!
+	firstPar.html("<strong>Hello</strong>World!");	//this would add: Hello World!
+
+Adding text to the previous:
+
+	let myParagraph = $("p").eq(1)
+	myParagraph.text(myParagraph.text() + " This text has been added")
+
+	for new html element you can use .html() as above or simply .append()
+
+------------------Events--------------------------------
+
+adding event formula: 
+
+CLICK: .click(function(){})
+
+	$(".red-box").click(function() {	//  the red ox will fade to 50% opacity
+  		this.fadeTo(2000, 0.5)
+	})
+
+	$(".red-box").click()			// writing this code below will trigger the funtion automatically, without need for an actual click.
+
+HOVER: .hover(function() {})
+
+	$(".green-box").hover(function() {
+  		$(this).text("Hovered upon!");
+	});
+
+MOUSE ENTER / LEAVE:
+
+(1) .mousenter(function(){}) / .mouseleave(function(){})
+
+	let blueBox = $(".blue-box");
+
+	blueBox.mouseenter(function() {
+	$(this).fadeTo(500, 0.7);
+	)};
+	blueBox.mouseenter(function() {
+	$(this).fadeTo(500, 1);
+	)};
+
+
+(2) .hover(function(){}, function(){})				//the first function handles the mouseenter() event, the latter mouseleave() event
+
+	blueBox.hover(function() {
+	$(this).fadeTo(500, 0.7);
+	},
+	function() {
+	$(this).fadeTo(500, 1);
+	});
+
+additional: .stop() //  this method will stop the execition of event in case it triggers many times and cause a delay.
+
+	blueBox.mouseenter(function() {
+	$(this).stop().fadeTo(500, 0.7);
+	)};
+
+MULTIPLE ACTIONS TO EVENT:
+
+.on("action1 action2 action3", function() {})	//  this allows to perform the same function for multiple events
+
+	$("html").on("click keydown", function() {
+		concole.log("Mouse was clicked or key was pressed");
+	});
+
+DELEGATED EVENTS
+The events usually do not work on elements added by jQuery, so you have to delegate them from the parent that was there since the very beginning.
+
+Formula: $("parentElement").on("eventName", "<addedElement>", function() {})
+
+	$("body").on("mouseenter", "li", function() {
+	 $(this).css("color", "orange")
+	});
+
+PASSING DATA TO EVENT (useful when welcoming someone after login)
+
+formula: $("element").action({ object }, function() { code that uses the object data})
+
+	$("#btn-click").click({
+	  name: "krzem",
+	  domain: "krzemGit.com"
+	}, function(event) {
+	  greetUser(event.data);
+	});
+
+	function greetUser(userdata) {
+	  username = userdata.name || "Anonymous";
+	  domain = userdata.domain || "unknown origin";
+	  alert(`Welcome back ${username} from ${domain}!`)
+	} 
+
+KEYDOWN EVENTS:
+
+formula: $("html").keydown(function(event) { if (event.which === ???) { our action}})
+
+useful function for identifying key codes (???): 
+	$("html").keydown(function(event) {
+  		console.log(event.which);})
+
+	const ARROW_RIGHT = 39;
+	$("html").keydown(function(event) {
+    	  if (event.which === ARROW_RIGHT){
+      	    $(".blue-box").animate({marginLeft: "+=20px"}, 1000)
+    	  }
+	})
+
+FORM - FOCUS AND BLUR:
+
+.focus() 	//  when the form is chosen
+.blur()		// when other form is chosen 
+
+	let inputFields = $("input:text, input:password, textarea");
+	
+	inputFields.focus(function() {
+	  $(this).css("box-shadow", "0 0 4px #665")
+	})
+
+	inputFields.blur(function() {
+	  if ($(this).val().length <= 3) {
+	    $(this).css("box-shadow", "0 0 4px red")
+	  }
+	  else {
+	  $(this).css("box-shadow", "none")}
+	})	
+
+CHANGE EVENTS:
+On change events are more responive for the form validation.
+Here we will use two selectors: ":checked" and ":selected"
+
+formula: $("input:???").change(function(){})
+
+	$("checkbox").change(function() {  // this will validate the checkbox and highlight it red
+		let isChecked = $(this).is(":checked") //  .is() returns true or false
+		if (isChecked) {
+		  $(this).css("box-shadow", "0 0 4px #181");
+		} else {
+		  $(this).css("box-shadow", "0 0 4px #811");
+		}
+	});
+
+	$("#selection").change(function() {		// this will alert the option in select
+		let selectedOption = $(this).find(":selected").text();
+		alert(selectedOption)
+	});
+
+SUBMIT EVENT:
+on the example of textarea:
+
+	$("#form").submit(function(event) {
+	 let textarea = $("#message"):
+	 if (textarea.val().trim() == "") {
+	  textarea.css("box-shadow", "0 0 4px red");
+	  event.preventDefult();
+	 } else {
+	  // form is submitted
+	 }
+	});
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+body {
+    background: whitesmoke;
+}
+
+.codetext {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 100;
+}
+
+h4 {
+    margin-left: 10px;
+    margin-top: 20px;
+    font-weight: bold ;
+}
+
+div.codebox {
+    border: solid 2px brown;
+    border-radius: 10px;
+    background-color: burlywood;
+    margin: 10px;
+    width: 600px;
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 10px;
+    color: rgb(80, 39, 39)
+}
+
+div.codebox2 {
+    border: solid 2px rgb(61, 60, 60);
+    background-color: darkgrey;
+    border-radius: 10px;
+    width: 600px;
+    margin: 10px;
+}
+
+img.warhammer {
+    margin: 1%;
+    width: 31%
+}
+
+img.warhammer:hover {
+    transform: scale(1.1);
+    transition: transform 500ms linear;
+}
+
+div.codebox3 {
+    border: solid 2px #02263d;
+    background-color: #5377A6;
+    border-radius: 10px;
+    width: 600px;
+    min-height: 400px;
+    margin: 10px;
+    background: rgba(23,100,181,1);
+    background: -moz-linear-gradient(left, rgba(23,100,181,1) 0%, rgba(23,100,181,1) 20%, rgba(77,167,250,1) 66%, rgba(77,167,250,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(23,100,181,1)), color-stop(20%, rgba(23,100,181,1)), color-stop(66%, rgba(77,167,250,1)), color-stop(100%, rgba(77,167,250,1)));
+    background: -webkit-linear-gradient(left, rgba(23,100,181,1) 0%, rgba(23,100,181,1) 20%, rgba(77,167,250,1) 66%, rgba(77,167,250,1) 100%);
+    background: -o-linear-gradient(left, rgba(23,100,181,1) 0%, rgba(23,100,181,1) 20%, rgba(77,167,250,1) 66%, rgba(77,167,250,1) 100%);
+    background: -ms-linear-gradient(left, rgba(23,100,181,1) 0%, rgba(23,100,181,1) 20%, rgba(77,167,250,1) 66%, rgba(77,167,250,1) 100%);
+    background: linear-gradient(to right, rgba(23,100,181,1) 0%, rgba(23,100,181,1) 20%, rgba(77,167,250,1) 66%, rgba(77,167,250,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1764b5', endColorstr='#4da7fa', GradientType=1 );
+}
+
+div#SW-list {
+    padding: 10px;
+    display: inline-block;
+    width: 30%;
+    float: left;
+    color: rgb(176, 209, 240);
+}
+
+div#SW-details {
+    display: inline-block;
+    width: 66%;
+    height: 300px;
+    text-align: center;
+    padding-top: 50px;
+}
+.logo-big {
+    /* margin-left:; */
+    height: 300px;
+}
+
+.small-icon {
+    height: 100px;
+}

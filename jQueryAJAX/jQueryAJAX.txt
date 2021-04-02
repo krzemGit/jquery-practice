@@ -1,0 +1,8 @@
+AJAX FUNCTIONS IN jQuery:
+
+$.get()
+$.post()
+$.ajax()
+$.getJSON()
+
+
